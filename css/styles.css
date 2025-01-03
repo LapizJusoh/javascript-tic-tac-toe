@@ -17,7 +17,12 @@
 .player-table {
   display: flex;
   justify-content: space-between;
-  width: 500px
+  width: 500px;
+}
+
+#player1-hud, #player2-hud {
+  padding: 10px;
+  border-radius: 15px;
 }
 
 #game-board {
