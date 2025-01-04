@@ -21,31 +21,42 @@ function createPlayer(name, marker) {
 const playerOne = createPlayer("One", 'X');
 const playerTwo = createPlayer("Two", 'O');
 
-function checkMatchThree(marker) {
+let currentPlayer = playerOne;
+
+function checkMatchThree(player) {
 
   // check row
   for (let i = 0; i < gameBoard.length; i+=3) {
-    if ( (gameBoard[i] == marker) && (gameBoard[i + 1] == marker ) && (gameBoard[i + 2] == marker ) ) {
-      return `Player ${marker} wins!`;
+    if ( (gameBoard[i] == player.marker) && (gameBoard[i + 1] == player.marker ) && (gameBoard[i + 2] == player.marker
+    ) ) {
+      return playerWin(player);
     }
   }
 
   // check column
   for (let i = 0; i < 3; i++) {
-    if ( (gameBoard[i] == 'X') && (gameBoard[i + 3] == 'X' ) && (gameBoard[i + 6] == 'X' ) ) {
-      return `Player ${marker} wins!`;
+    if ( (gameBoard[i] == player.marker) && (gameBoard[i + 3] == player.marker ) && (gameBoard[i + 6] ==
+    player.marker )) {
+      return playerWin(player);
     }
   }
 
   // check diagonal
-  if ( ( (gameBoard[0] == marker) && (gameBoard[4] == marker) && (gameBoard[8] == marker) ) ||
-  ( (gameBoard[2] == marker) && (gameBoard[4] == marker) && (gameBoard[6] == marker) )
+  if ( ( (gameBoard[0] == player.marker) && (gameBoard[4] == player.marker) && (gameBoard[8] == player.marker) ) ||
+  ( (gameBoard[2] == player.marker) && (gameBoard[4] == player.marker) && (gameBoard[6] == player.marker) )
   ) {
-    return `Player ${marker} wins!`;
+    return playerWin(player);
   }
-}
 
+  return false;
+}
 
 function checkWin(player) {
 
+  console.log ( checkMatchThree(player) );
+}
+
+function playerWin(player) {
+  player.addScore();
+  return `Player ${player.name} wins!`
 }
