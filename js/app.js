@@ -4,14 +4,23 @@
 6 7 8
 */
 
-// Initialize gameboard, from index 0 -> 8
 const gameBoard = [
   'X','O','X',
   'O','X','O',
   'X','O','X'
 ];
 
-// Initialize match three function
+function createPlayer(name, marker) {
+
+  let score = 0;
+  const getScore = () => score;
+  const addScore = () => score++;
+  return { name, marker, getScore, addScore }
+}
+
+const playerOne = createPlayer("One", 'X');
+const playerTwo = createPlayer("Two", 'O');
+
 function checkMatchThree(marker) {
 
   // check row
@@ -34,4 +43,9 @@ function checkMatchThree(marker) {
   ) {
     return `Player ${marker} wins!`;
   }
+}
+
+
+function checkWin(player) {
+
 }
