@@ -1,11 +1,14 @@
-/*
-- Game Board Grid
+/* Game Board Grid
 0 1 2
 3 4 5
 6 7 8
 */
 
-const gameBoard = ['','','','','','','','',''];
+const gameBoard = [
+  '','','',
+  '','','',
+  '','',''
+];
 // Initialize gameboard, from index 0 -> 8
 
 const winningCombo = [
@@ -23,5 +26,22 @@ function checkWin() {
 // testing area
 const gameBoardThree = ['X','X','X'];
 
-console.log( gameBoardThree.every((grid) => grid == 'X') );
+if ( gameBoard.every((grid) => grid !== '') ) console.log('draw!');
 
+
+
+
+// IF WE BRUTE FORCE IT:-
+
+if (
+  ( (gameBoard[0] == 'X') && (gameBoard[1] == 'X') && (gameBoard[2] == 'X') ) ||
+  ( (gameBoard[3] == 'X') && (gameBoard[4] == 'X') && (gameBoard[5] == 'X') ) ||
+  ( (gameBoard[6] == 'X') && (gameBoard[7] == 'X') && (gameBoard[8] == 'X') ) ||
+  ( (gameBoard[0] == 'X') && (gameBoard[3] == 'X') && (gameBoard[6] == 'X') ) ||
+  ( (gameBoard[1] == 'X') && (gameBoard[4] == 'X') && (gameBoard[7] == 'X') ) ||
+  ( (gameBoard[2] == 'X') && (gameBoard[5] == 'X') && (gameBoard[8] == 'X') ) ||
+  ( (gameBoard[0] == 'X') && (gameBoard[4] == 'X') && (gameBoard[8] == 'X') ) ||
+  ( (gameBoard[2] == 'X') && (gameBoard[4] == 'X') && (gameBoard[8] == 'X') )
+) {
+
+}
