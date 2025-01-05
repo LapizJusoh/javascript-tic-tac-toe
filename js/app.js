@@ -4,11 +4,7 @@
 6 7 8
 */
 
-const gameBoard = [
-  'X','O','X',
-  'O','X','O',
-  'X','O','X'
-];
+const gameBoard = [];
 
 function createPlayer(name, marker) {
 
@@ -52,7 +48,6 @@ function checkMatchThree(player) {
 }
 
 function checkWin(player) {
-
   console.log ( checkMatchThree(player) );
 }
 
@@ -60,3 +55,34 @@ function playerWin(player) {
   player.addScore();
   return `Player ${player.name} wins!`
 }
+
+function createGameBoard() {
+  for(let i = 0; i < 9; i++) {
+    const gameBoardArea = document.querySelector('#game-board');
+    const div = document.createElement('div');
+    div.setAttribute("class","grid");
+    div.addEventListener("click", (e) =>  {
+
+      if (gameBoard[i] == '') {
+
+        div.innerHTML = currentPlayer.marker;
+        div.style.cursor = 'default';
+        gameBoard[i] = currentPlayer.marker;
+
+        if ( gameBoard.every((grid) => grid!=='')) {
+          return console.log('All grids are filled- Match end!');
+        }
+
+        currentPlayer = (currentPlayer == playerOne ? playerTwo : playerOne);
+      }
+
+    });
+
+    gameBoardArea.appendChild(div);
+
+    gameBoard.push('');
+    
+  }
+}
+
+createGameBoard();
