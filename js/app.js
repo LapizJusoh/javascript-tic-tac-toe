@@ -17,9 +17,9 @@ function createPlayer(name, marker) {
 }
 
 const displayController = {
-  getPlayerScoreDisplay: (player) => document.querySelector(`#player${player.name}-score`),
-  getPlayerHUDDisplay: (player) => document.querySelector(`#player${player.name}-hud`),
-  getPlayerTurnText: (player) => document.querySelector(`#player-turn-text`)
+  playerScoreDisplay: (player) => document.querySelector(`#player${player.name}-score`),
+  playerHUDDisplay: (player) => document.querySelector(`#player${player.name}-hud`),
+  playerTurnText: () => document.querySelector(`#player-turn-text`)
 }
 
 function checkMatchThree(player) {
@@ -52,10 +52,22 @@ function checkMatchThree(player) {
 
 (function () {
 
-  function createGameBoard() {
-    for (let i = 0; i < gameBoard.length; i++) {
+  let currentPlayer = playerOne;
 
+  function createGameBoard() {
+
+    const gameBoardDisplay = document.querySelector(`#game-board`);
+    displayController.playerScoreDisplay(playerOne).innerHTML = `${playerOne.getScore()}`;
+    displayController.playerScoreDisplay(playerTwo).innerHTML = `${playerTwo.getScore()}`;
+
+    for (let i = 0; i < 9; i++) {
+      const div = document.createElement(`div`);
+      div.classList.add(`grid`);
+      gameBoardDisplay.appendChild(div);
     }
+
   }
+
+  createGameBoard();
 
 })();
