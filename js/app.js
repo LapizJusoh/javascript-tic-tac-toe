@@ -13,8 +13,13 @@ function createPlayer(name, marker) {
   let score = 0;
   const getScore = () => score;
   const addScore = () => score++;
-  const getScoreDisplay = () => document.querySelector(`#player${name}-score`);
-  return { name, marker, getScore, addScore, getScoreDisplay }
+  return { name, marker, getScore, addScore}
+}
+
+const displayController = {
+  getPlayerScoreDisplay: (player) => document.querySelector(`#player${player.name}-score`),
+  getPlayerHUDDisplay: (player) => document.querySelector(`#player${player.name}-hud`),
+  getPlayerTurnText: (player) => document.querySelector(`#player-turn-text`)
 }
 
 function checkMatchThree(player) {
@@ -44,3 +49,13 @@ function checkMatchThree(player) {
 
   return false;
 }
+
+(function () {
+
+  function createGameBoard() {
+    for (let i = 0; i < gameBoard.length; i++) {
+
+    }
+  }
+
+})();
