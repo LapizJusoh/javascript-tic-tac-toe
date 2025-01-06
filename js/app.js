@@ -4,7 +4,7 @@
 6 7 8
 */
 
-const gameBoard = [];
+const gameBoard = ['','','','','','','','',''];
 const playerOne = createPlayer("One", 'X');
 const playerTwo = createPlayer("Two", 'O');
 
@@ -59,11 +59,19 @@ function checkMatchThree(player) {
     const gameBoardDisplay = document.querySelector(`#game-board`);
     displayController.playerScoreDisplay(playerOne).innerHTML = `${playerOne.getScore()}`;
     displayController.playerScoreDisplay(playerTwo).innerHTML = `${playerTwo.getScore()}`;
+    displayController.playerTurnText().innerHTML = `It's Player ${currentPlayer.name}'s turn!`;
 
     for (let i = 0; i < 9; i++) {
       const div = document.createElement(`div`);
       div.classList.add(`grid`);
       gameBoardDisplay.appendChild(div);
+
+      div.addEventListener("click", () => {
+        gameBoard[i] = currentPlayer.marker;
+        div.innerHTML = currentPlayer.marker;
+        currentPlayer = currentPlayer==playerOne ? playerTwo : playerOne;
+        displayController.playerTurnText().innerHTML = `It's Player ${currentPlayer.name}'s turn!`;
+      })
     }
 
   }
