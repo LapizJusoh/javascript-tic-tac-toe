@@ -19,7 +19,7 @@ function createPlayer(name, marker) {
 const displayController = {
   playerScoreDisplay: (player) => document.querySelector(`#player${player.name}-score`),
   playerHUDDisplay: (player) => document.querySelector(`#player${player.name}-hud`),
-  playerTurnText: () => document.querySelector(`#player-turn-text`)
+  playerTurnText: document.querySelector(`#player-turn-text`)
 }
 
 function checkMatchThree(player) {
@@ -59,19 +59,27 @@ function checkMatchThree(player) {
     const gameBoardDisplay = document.querySelector(`#game-board`);
     displayController.playerScoreDisplay(playerOne).innerHTML = `${playerOne.getScore()}`;
     displayController.playerScoreDisplay(playerTwo).innerHTML = `${playerTwo.getScore()}`;
-    displayController.playerTurnText().innerHTML = `It's Player ${currentPlayer.name}'s turn!`;
+    displayController.playerTurnText.innerHTML = `It's Player ${currentPlayer.name}'s turn!`;
 
     for (let i = 0; i < 9; i++) {
       const div = document.createElement(`div`);
       div.classList.add(`grid`);
       gameBoardDisplay.appendChild(div);
 
-      div.addEventListener("click", () => {
-        gameBoard[i] = currentPlayer.marker;
-        div.innerHTML = currentPlayer.marker;
-        currentPlayer = currentPlayer==playerOne ? playerTwo : playerOne;
-        displayController.playerTurnText().innerHTML = `It's Player ${currentPlayer.name}'s turn!`;
-      })
+      (() => {
+        function clickGrid() {
+          gameBoard[i] = currentPlayer.marker;
+          div.innerHTML = currentPlayer.marker;
+          currentPlayer = currentPlayer==playerOne ? playerTwo : playerOne;
+          displayController.playerTurnText.innerHTML = `It's Player ${currentPlayer.name}'s turn!`;
+          div.removeEventListener("click", clickGrid);
+        }
+
+        return div.addEventListener("click", clickGrid);
+      })();
+
+
+      
     }
 
   }
