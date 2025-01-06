@@ -8,16 +8,13 @@ const gameBoard = [];
 const playerOne = createPlayer("One", 'X');
 const playerTwo = createPlayer("Two", 'O');
 
-let currentPlayer = playerOne;
-let roundEnd = false;
-let gameEnd = false;
-
 function createPlayer(name, marker) {
 
   let score = 0;
   const getScore = () => score;
   const addScore = () => score++;
-  return { name, marker, getScore, addScore }
+  const getScoreDisplay = () => document.querySelector(`#player${name}-score`);
+  return { name, marker, getScore, addScore, getScoreDisplay }
 }
 
 function checkMatchThree(player) {
@@ -46,55 +43,4 @@ function checkMatchThree(player) {
   }
 
   return false;
-}
-
-
-function checkWin(player) {
-  player.addScore();
-  alert(`Player ${player.name} wins!`);
-  roundEnd = true;
-}
-
-function clickGrid(index) {
-
-  if ( (gameBoard[index] == '') && ( !roundEnd ) ) {
-
-    this.innerHTML = currentPlayer.marker;
-    this.style.cursor = 'default';
-    gameBoard[index] = currentPlayer.marker;
-
-    checkMatchThree(currentPlayer);
-    if (gameBoard.every((grid) => grid !== '')) {
-      return console.log('All grids are filled- Match end!');
-    }
-
-    if (!roundEnd) {
-      currentPlayer = (currentPlayer == playerOne ? playerTwo : playerOne);
-      turnOrderText.innerHTML = `It is Player ${currentPlayer.name}'s turn!`
-    }
-  }
-}
-
-function createGameBoard() {
-
-  const turnOrderText = document.querySelector('#player-turn-text');
-
-  document.querySelector('#player1-hud').setAttribute("style","color:white;background-color:red");
-  document.querySelector('#player2-hud').setAttribute("style","color:black;background-color:white");
-  turnOrderText.innerHTML = `It is Player ${currentPlayer.name}'s turn!`
-
-  for (let i = 0; i < 9; i++) {
-    const gameBoardArea = document.querySelector('#game-board');
-    const div = document.createElement('div');
-    div.setAttribute("class", "grid");
-    div.addEventListener("click", clickGrid.bind(div, i));
-    gameBoardArea.appendChild(div);
-    gameBoard.push('');
-  }
-}
-
-createGameBoard();
-
-const test = () => {
-
 }
