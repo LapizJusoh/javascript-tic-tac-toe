@@ -16,13 +16,19 @@
 
 .player-table {
   display: flex;
-  justify-content: space-between;
-  width: 500px;
+  justify-content: center;
 }
 
 #player1-hud, #player2-hud {
+  display: flex;
   padding: 10px;
   border-radius: 15px;
+  width: 300px;
+  color: black;
+}
+
+#player2-hud {
+  justify-content: end;
 }
 
 #game-board {
